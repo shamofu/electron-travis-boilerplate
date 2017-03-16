@@ -19,3 +19,19 @@ after_success:
   - sh -e /etc/init.d/xvfb stop
 after_failure:
   - sh -e /etc/init.d/xvfb stop
+before_deploy:
+  - npm run pack
+  - zip -r 'electron-travis-boilerplate-win32-x64.zip' 'electron-travis-boilerplate-win32-x64'
+  - zip -r 'electron-travis-boilerplate-darwin-x64.zip' 'electron-travis-boilerplate-darwin-x64'
+  - zip -r 'electron-travis-boilerplate-linux-x64.zip' 'electron-travis-boilerplate-linux-x64'
+deploy:
+  provider: releases
+  api_key:
+    secure: xQanIsSR5QgjegNKwE0uhoKaIxCr0HMZvFTJRQog/X/NfB+ywp0+n3SnysiHYSUKqgP3t/MYhA35FSvmFrgmAO4UHcMx28Vfv/Aga33c7LxD60gxe1Jj9pNaX+CpcykQudxL07WSK6TOKsTYTXAf/NY2maWwM/VNaNPGQ6SYXbMyaQTb4hXC5rIkfJN4hm/PweoyHjk+DGbB2W2svNwq8e1vzi+1e4maexMP6ZIeiAzHXAJaudv6z1IUrixCe7wekC+35sBARhmy7Oxs3uPpxLble+yyu2CXb2Rp7cceG7gadOE9ZKO7zxdgpHk2Es6/4Lz+2uMIlSVG/AtYotNKcrHlEfNMXTF2NvBGsBaA8ZcKPTET2Dqm6FoX8lOC68mZY5X74SDCvNxjkwviP1+bzI8pCeCbpnDMoekTm/dymnca5RyiriIlCjOfuwi52jZ869G7XN44pH5ca/o7ncQX0Q4zpOcSW4WTKs2cxYrvBXMJ8U4M9+mKBsVGpdLuV0LtQSzZ+mZzANbk72eKmSMBEpk2uXW1yh8ha4eGvWumvLCuLei1QpMLAXZ8cCk1Nbwi++4aFegCuZOqdcOoc9oSxWw/rIvvgmtoa5XKNmYTESYXG1T3TI/khxH+ggJFydCKDeYfN6lZQDemAazvrTac+4GCwNPHmklPAsJedptzHCY=
+  file:
+    - 'electron-travis-boilerplate-win32-x64.zip'
+    - 'electron-travis-boilerplate-darwin-x64.zip'
+    - 'electron-travis-boilerplate-linux-x64.zip'
+  skip_cleanup: true
+  on:
+    tags: true
