@@ -1,0 +1,58 @@
+{
+  "name": "electron-travis-boilerplate",
+  "version": "1.0.0",
+  "description": "build test",
+  "main": "app/main.js",
+  "scripts": {
+    "test": "npm run comp && node test/test.js",
+    "start": "gulp start",
+    "comp": "gulp comp",
+    "dist": "gulp dist",
+    "gulp": "gulp",
+    "pack": "npm run dist && electron-packager _dist electron-travis-boilerplate --platform=win32,darwin,linux --arch=x64 --asar --electron-version=1.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shamofu/electron-travis-boilerplate.git"
+  },
+  "author": "shamofu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shamofu/electron-travis-boilerplate/issues"
+  },
+  "homepage": "https://github.com/shamofu/electron-travis-boilerplate#readme",
+  "babel": {
+    "sourceMaps": "inline",
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  },
+  "devDependencies": {
+    "asar": "^0.13.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "electron": "^1.6.2",
+    "electron-connect": "^0.6.1",
+    "electron-packager": "^8.5.2",
+    "glob": "^7.1.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-useref": "^3.1.2",
+    "rcedit": "^0.8.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "slash": "^1.0.0",
+    "spectron": "^3.6.0",
+    "uglify-js": "^2.8.12",
+    "uglifyjs-webpack-plugin": "^0.3.0",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^2.2.1",
+    "webpack-stream": "^3.2.0"
+  }
+}

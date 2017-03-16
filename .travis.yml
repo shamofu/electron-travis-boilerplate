@@ -1,0 +1,21 @@
+language: node_js
+node_js: node
+os: linux
+dist: trusty
+sudo: required
+install:
+  - sudo dpkg --add-architecture i386
+  - sudo add-apt-repository ppa:wine/wine-builds -y
+  - sudo apt-get update
+  - sudo apt-get install --install-recommends winehq-staging -y
+  - npm install
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 5
+script:
+  - npm test
+after_success:
+  - sh -e /etc/init.d/xvfb stop
+after_failure:
+  - sh -e /etc/init.d/xvfb stop
