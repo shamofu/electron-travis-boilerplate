@@ -3,26 +3,36 @@ var compDir = '_comp';
 var distDir = '_dist';
 
 var gulp = require('gulp');
+var del = require('del');
 var webpack = require('webpack');
 var webpackStream = require('webpack-stream');
-var named = require('vinyl-named');
 var $ = require('gulp-load-plugins')();
-var electron = require('electron-connect').server.create({path: compDir});
+var electron = require('electron-connect').server.create({path: compDir, stopOnClose: true});
 
 var webpackConfig = require('./webpack.config.js');
 
 gulp.task('comp', ['copy2comp'], function() {
-  return gulp.src(appDir + '/**/*.{js,jsx}')
+  return gulp.src(appDir + '/**/*.jsx')
     .pipe($.babel())
     .pipe(gulp.dest(compDir));
 });
 
 gulp.task('start', ['comp'], function() {
-  electron.start();
-  gulp.watch(appDir + '/**/*.{js,jsx}', ['comp']);
-  gulp.watch([appDir + '/**', '!' + appDir + '/**/*.{js,jsx}'], ['copy2comp']);
-  // gulp.watch(compDir + '/main.js', electron.restart);
-  gulp.watch([compDir + '/**/*.{html,js,css}', '!' + compDir + '/main.js'], electron.reload);
+  electron.start(ecallback);
+  gulp.watch(appDir + '/main.js', ['erestart']);
+  gulp.watch([appDir + '/**', '!' + appDir + '/main.js'], ['ereload']);
+});
+
+var ecallback = function(electronProcState) {
+  if (electronProcState == 'stopped') {
+    electron.start(ecallback);
+  }
+}
+gulp.task('erestart', ['comp'], function() {
+  electron.restart();
+});
+gulp.task('ereload', ['comp'], function() {
+  electron.reload();
 });
 
 gulp.task('dist', ['copy2dist'], function() {
@@ -30,13 +40,17 @@ gulp.task('dist', ['copy2dist'], function() {
     .pipe(gulp.dest(distDir));
 });
 
-gulp.task('copy2comp', function() {
-  gulp.src([appDir + '/**', '!' + appDir + '/**/*.{js,jsx}'], {base: appDir})
+gulp.task('copy2comp', ['cclean'], function() {
+  gulp.src([appDir + '/**', '!' + appDir + '/**/*.jsx'], {base: appDir})
     .pipe(gulp.dest(compDir));
 });
 
-gulp.task('copy2dist', function() {
-  gulp.src([appDir + '/**', '!' + appDir + '/**/*.{js,jsx}'], {base: appDir})
+gulp.task('copy2dist', ['dclean'], function() {
+  gulp.src([appDir + '/**', '!' + appDir + '/**/*.jsx'], {base: appDir})
     .pipe($.useref())
     .pipe(gulp.dest(distDir));
 });
+
+gulp.task('clean', del.bind(null, ['_comp', '_dist']));
+gulp.task('cclean', del.bind(null, '_comp'));
+gulp.task('dclean', del.bind(null, '_dist'));

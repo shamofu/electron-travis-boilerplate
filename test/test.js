@@ -14,6 +14,7 @@ const app = new Application({
   args: [appPath]
 });
 
+/*
 app.start().then(function () {
   return app.browserWindow.isVisible();
 }).then(function (isVisible) {
@@ -25,3 +26,4 @@ app.start().then(function () {
   console.error("\ntest failed", error.message);
   return app.stop();
 });
+*/
