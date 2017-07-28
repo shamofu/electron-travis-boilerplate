@@ -48,10 +48,10 @@
     "react-dom": "^15.5.4",
     "slash": "^1.0.0",
     "spectron": "^3.6.4",
-    "uglify-js": "^2.8.15",
+    "uglify-js": "^3.0.26",
     "uglifyjs-webpack-plugin": "^0.4.3",
     "vinyl-named": "^1.1.0",
-    "webpack": "^2.6.1",
+    "webpack": "^3.4.1",
     "webpack-stream": "^3.2.0"
   }
 }
