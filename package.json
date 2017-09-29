@@ -1,6 +1,6 @@
 {
   "name": "electron-travis-boilerplate",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "build test",
   "main": "app/main.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "lint": "gulp lint",
     "start": "gulp start",
     "gulp": "gulp",
-    "pack": "gulp dist && electron-packager _dist electron-travis-boilerplate --electron-version=1.6.11 --platform=win32,darwin,linux --arch=x64 --asar"
+    "pack": "gulp dist && electron-packager _dist electron-travis-boilerplate --electron-version=1.7.8 --platform=win32,darwin,linux --arch=x64 --asar"
   },
   "repository": {
     "type": "git",
