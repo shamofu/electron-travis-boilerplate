@@ -24,9 +24,9 @@ before_deploy:
   - sudo apt-get update
   - sudo apt-get install --install-recommends winehq-staging -y
   - npm run pack
-  - zip -r electron-travis-boilerplate-win32-x64.zip electron-travis-boilerplate-win32-x64/*
-  - zip -r electron-travis-boilerplate-darwin-x64.zip electron-travis-boilerplate-darwin-x64/*
-  - zip -r electron-travis-boilerplate-linux-x64.zip electron-travis-boilerplate-linux-x64/*
+  - zip -9 -r electron-travis-boilerplate-win32-x64.zip electron-travis-boilerplate-win32-x64/*
+  - zip -9 -r electron-travis-boilerplate-darwin-x64.zip electron-travis-boilerplate-darwin-x64/*
+  - zip -9 -r electron-travis-boilerplate-linux-x64.zip electron-travis-boilerplate-linux-x64/*
 deploy:
   provider: releases
   api_key:
