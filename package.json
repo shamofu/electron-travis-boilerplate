@@ -1,6 +1,6 @@
 {
   "name": "electron-travis-boilerplate",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "build test",
   "main": "app/main.js",
   "scripts": {
