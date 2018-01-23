@@ -4,16 +4,16 @@ os: linux
 dist: trusty
 sudo: required
 install:
-  - npm install
+  - yarn install
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 5
 script:
-  - npm test
-  - npm run gulp comp
-  - npm run gulp dist
-  - npm run gulp clean
+  - yarn test
+  - yarn gulp comp
+  - yarn gulp dist
+  - yarn gulp clean
 after_success:
   - sh -e /etc/init.d/xvfb stop
 after_failure:
@@ -24,7 +24,7 @@ before_deploy:
   - sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
   - sudo apt-get update
   - sudo apt-get install --install-recommends winehq-stable -y
-  - npm run pack
+  - yarn pack
   - zip -9 -r electron-travis-boilerplate-win32-x64.zip electron-travis-boilerplate-win32-x64
   - zip -9 -r electron-travis-boilerplate-darwin-x64.zip electron-travis-boilerplate-darwin-x64
   - zip -9 -r electron-travis-boilerplate-linux-x64.zip electron-travis-boilerplate-linux-x64
